@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Input from './components/Input.svelte';
+	import { invoke } from '@tauri-apps/api/tauri';
 
 	const dispatch = createEventDispatcher();
 
@@ -13,20 +14,19 @@
 	async function login() {
 		dispatch('submit');
 
-		// TODO - remove /sql
-		const databases = await fetch(url || '/sql', {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				Authorization: 'Basic ' + btoa(username + ':' + password),
-				NS: namespace
-			},
-			body: 'INFO FOR KV;'
+		const success = await invoke('login', {
+			url,
+			username,
+			password,
+			namespace
 		});
 
-		error = databases.status !== 200;
+		dispatch('login', !success);
 
-		if (error) return dispatch('login', error);
+		if (!success) {
+			error = true;
+			return;
+		}
 	}
 </script>
 
