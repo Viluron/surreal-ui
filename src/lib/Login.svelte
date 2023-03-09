@@ -2,11 +2,13 @@
 	import { createEventDispatcher } from 'svelte';
 	import Input from './components/Input.svelte';
 	import { invoke } from '@tauri-apps/api/tauri';
+	import { DATABASE_URL, NAMESPACE, PASSWORD, USERNAME } from '../stores/user';
+	import { DATABASE, NAMESPACES } from '../stores/database';
+	import { query } from '../util/request';
 
 	const dispatch = createEventDispatcher();
 
 	let url: string = undefined;
-	let namespace: string = undefined;
 	let username: string = undefined;
 	let password: string = undefined;
 	let error: boolean = false;
@@ -14,16 +16,37 @@
 	async function login() {
 		dispatch('submit');
 
-		const success = await invoke('login', {
+		const res: string = await invoke('query', {
 			url,
 			username,
 			password,
-			namespace
+			namespace: '',
+			query: `INFO FOR KV;`
 		});
 
-		dispatch('login', !success);
+		try {
+			const { status, data } = JSON.parse(res);
 
-		if (!success) {
+			debugger;
+			if (status !== '200 OK') {
+				error = true;
+				return;
+			}
+
+			USERNAME.set(username);
+			PASSWORD.set(password);
+			DATABASE_URL.set(url);
+
+			console.log('Received namespaces: ', data[0].result.ns);
+			NAMESPACES.set(Object.keys(data[0].result.ns));
+
+			// TODO: set first namespace and get databases
+
+			dispatch('login', true);
+		} catch (e) {
+			console.error(e);
+
+			dispatch('login', false);
 			error = true;
 			return;
 		}
@@ -42,8 +65,6 @@
 		</div>
 		<div id="loginForm" class="login-form">
 			<Input placeholder="Database URL" class="test" on:change={({ detail }) => (url = detail)} />
-			<div class="spacer" />
-			<Input placeholder="Namespace" class="test" on:change={({ detail }) => (namespace = detail)} />
 			<div class="spacer" />
 			<Input placeholder="Username" class="test" on:change={({ detail }) => (username = detail)} />
 			<div class="spacer" />

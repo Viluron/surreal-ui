@@ -6,10 +6,10 @@
 	let loading = false;
 	let loggedIn = false;
 
-	function login({ detail: error }) {
+	function login({ detail: success }) {
 		loading = false;
 
-		if (error) return;
+		if (!success) return;
 
 		loggedIn = true;
 	}
@@ -17,11 +17,11 @@
 
 <main>
 	<LoadingSpinner visible={loading} />
-	<!-- {#if !loggedIn}
+	{#if !loggedIn}
 		<Login on:submit={() => (loading = true)} on:login={login} />
-	{:else} -->
-	<Layout />
-	<!-- {/if} -->
+	{:else}
+		<Layout />
+	{/if}
 </main>
 
 <style>

@@ -4,21 +4,25 @@
 mod https;
 
 #[tauri::command]
-fn login(url: &str, username: &str, password: Option<String>, namespace: &str) -> bool {
-    let response = https::query(
-        &url,
-        &username,
-        password.clone(),
-        &namespace,
-        "INFO FOR KV;",
-    );
+fn query(
+    url: &str,
+    username: &str,
+    password: Option<String>,
+    namespace: &str,
+    query: &str,
+) -> String {
+    let response = https::query(&url, &username, password.clone(), &namespace, &query);
 
-    response.status().is_success()
+    return format!(
+        "{{\"status\": \"{}\", \"data\": {}}}",
+        response.status(),
+        response.text().unwrap()
+    );
 }
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![login])
+        .invoke_handler(tauri::generate_handler![query])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

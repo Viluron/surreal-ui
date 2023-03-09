@@ -1,3 +1,6 @@
-import { writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-const basicAuth = writable<string>('');
+export const USERNAME = writable('');
+export const PASSWORD = writable('');
+export const DATABASE_URL = writable('');
+export const NAMESPACE = writable('');
