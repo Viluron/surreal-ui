@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LoadingSpinner from './lib/components/LoadingSpinner.svelte';
+	import Layout from './lib/Layout.svelte';
 	import Login from './lib/Login.svelte';
 
 	let loading = false;
@@ -16,11 +17,11 @@
 
 <main>
 	<LoadingSpinner visible={loading} />
-	{#if !loggedIn}
+	<!-- {#if !loggedIn}
 		<Login on:submit={() => (loading = true)} on:login={login} />
-	{:else}
-		<h1>Logged in!</h1>
-	{/if}
+	{:else} -->
+	<Layout />
+	<!-- {/if} -->
 </main>
 
 <style>

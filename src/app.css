@@ -27,6 +27,7 @@
 	--border-color: #333949;
 	--sidebar-color: #222632;
 	--gradient: linear-gradient(-60deg, #8700ff 0, #ff009e 100%);
+	--lines: rgba(255, 255, 255, 0.1);
 }
 
 body {
@@ -38,4 +39,30 @@ body {
 	background-repeat: no-repeat;
 	overflow: hidden;
 	font-size: 1.2rem;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-column {
+	flex-direction: column;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.w100 {
+	width: 100%;
+}
+
+.h100 {
+	height: 100%;
 }
