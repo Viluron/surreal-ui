@@ -3,6 +3,7 @@
 	import { ACTIVE_TAB } from '../../stores/app';
 	import Home from '../view/Home.svelte';
 	import Query from '../view/Query.svelte';
+	import Settings from '../view/Settings/Settings.svelte';
 	import Tables from '../view/Tables/Tables.svelte';
 
 	let app: Tab;
@@ -16,6 +17,8 @@
 		<Query />
 	{:else if app === 'tables'}
 		<Tables />
+	{:else if app === 'settings'}
+		<Settings />
 	{/if}
 </div>
 

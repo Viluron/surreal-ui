@@ -40,4 +40,4 @@ export interface IInfoDB extends Omit<IQueryResponse, 'result'> {
 	};
 }
 
-export type Tab = 'home' | 'query' | 'tables';
+export type Tab = 'home' | 'query' | 'tables' | 'settings';

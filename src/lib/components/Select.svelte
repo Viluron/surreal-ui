@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { GLOW_ACTIVE } from '../../stores/app';
 	import { createEventDispatcher } from 'svelte';
 	import Icon from './Icon.svelte';
 
 	export let options: string[] = [];
 	export let selected: string = options[0];
 	export let placeholder: string = '';
+
+	let glow = $GLOW_ACTIVE;
 
 	const dispatch = createEventDispatcher();
 
@@ -18,7 +21,7 @@
 	}
 </script>
 
-<div class="custom-select-wrapper center">
+<div class={`custom-select-wrapper center ${glow ? 'glow' : ''}`}>
 	<div class="custom-select">
 		<div class="input-container flex center">
 			<input readonly />
@@ -57,7 +60,9 @@
 	.custom-select-wrapper:focus-within {
 		background: var(--gradient);
 		color: var(--font-color);
-		transition: 1s ease-in-out;
+	}
+
+	.custom-select-wrapper.glow:focus-within {
 		box-shadow: var(--box-shadow);
 	}
 
