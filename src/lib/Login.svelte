@@ -56,6 +56,13 @@
 		const databases = Object.keys(response.db);
 		DATABASES.set(databases || []);
 
+		if (databases.length === 0) {
+			dispatch('login', true);
+			return;
+		}
+
+		DATABASE.set(databases[0]);
+
 		dispatch('login', true);
 	}
 </script>

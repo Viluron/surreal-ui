@@ -1,5 +1,27 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import type { Tab } from '../../constants/types';
+	import { ACTIVE_TAB } from '../../stores/app';
+	import Home from '../view/Home.svelte';
+	import Query from '../view/Query.svelte';
+	import Tables from '../view/Tables/Tables.svelte';
 
-<div id="content" />
+	let app: Tab;
+	ACTIVE_TAB.subscribe(value => (app = value));
+</script>
 
-<style></style>
+<div id="content">
+	{#if app === 'home'}
+		<Home />
+	{:else if app === 'query'}
+		<Query />
+	{:else if app === 'tables'}
+		<Tables />
+	{/if}
+</div>
+
+<style>
+	#content {
+		height: 100%;
+		width: 100%;
+	}
+</style>
