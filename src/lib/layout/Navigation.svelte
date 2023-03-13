@@ -18,6 +18,8 @@
 		<Divider height="1.5rem" />
 		<NavItem icon="database" text="SQL query" tab="query" />
 		<NavItem icon="grid_on" text="Tables" tab="tables" />
+		<Divider height="1.5rem" />
+		<NavItem icon="settings" text="Settings" tab="settings" />
 	</div>
 </div>
 
