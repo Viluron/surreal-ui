@@ -2,16 +2,19 @@
 	import LoadingSpinner from './lib/components/LoadingSpinner.svelte';
 	import Layout from './lib/Layout.svelte';
 	import Login from './lib/Login.svelte';
+	import { LOGGED_IN } from './stores/user';
 
 	let loading = false;
-	let loggedIn = false;
+
+	let loggedIn;
+	LOGGED_IN.subscribe(value => (loggedIn = value));
 
 	function login({ detail: success }) {
 		loading = false;
 
 		if (!success) return;
 
-		loggedIn = true;
+		LOGGED_IN.set(true);
 	}
 </script>
 
