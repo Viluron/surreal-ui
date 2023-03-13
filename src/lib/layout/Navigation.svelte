@@ -14,22 +14,21 @@
 		</div>
 	</div>
 	<div class="nav-item-container flex h100 flex-column">
-		<NavItem icon="home" text="Home" />
+		<NavItem icon="home" text="Home" tab="home" />
 		<Divider height="1.5rem" />
-		<NavItem icon="database" text="SQL query" />
-		<NavItem icon="grid_on" text="Tables" selected />
+		<NavItem icon="database" text="SQL query" tab="query" />
+		<NavItem icon="grid_on" text="Tables" tab="tables" />
 	</div>
 </div>
 
-<style>
+<style scoped>
 	#database-select {
-		height: 5.5rem;
+		height: 5rem;
 		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		border-bottom: 1px solid var(--lines);
 		margin-bottom: 0.75rem;
 	}
 

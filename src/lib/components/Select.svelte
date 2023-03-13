@@ -58,6 +58,7 @@
 		background: var(--gradient);
 		color: var(--font-color);
 		transition: 1s ease-in-out;
+		box-shadow: var(--box-shadow);
 	}
 
 	.custom-select {

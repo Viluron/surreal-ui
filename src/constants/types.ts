@@ -39,3 +39,5 @@ export interface IInfoDB extends Omit<IQueryResponse, 'result'> {
 		};
 	};
 }
+
+export type Tab = 'home' | 'query' | 'tables';
