@@ -5,7 +5,7 @@
 </script>
 
 <template>
-	<span class="material-icons" style={`color: ${color}; font-size: ${size}`}>{icon}</span>
+	<span class="material-symbols-outlined" style={`color: ${color}; font-size: ${size}`}>{icon}</span>
 </template>
 
 <style scoped>
