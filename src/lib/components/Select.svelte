@@ -3,7 +3,7 @@
 	import Icon from './Icon.svelte';
 
 	export let options: string[] = [];
-	export let selected: string = '';
+	export let selected: string = options[0];
 	export let placeholder: string = '';
 
 	const dispatch = createEventDispatcher();
@@ -48,6 +48,10 @@
 		width: 100%;
 		border-radius: 4px;
 		color: var(--faint-color);
+	}
+
+	.custom-select-wrapper input:hover {
+		cursor: pointer;
 	}
 
 	.custom-select-wrapper:focus-within {
@@ -102,12 +106,14 @@
 		position: absolute;
 		width: 100%;
 		max-height: 500%;
-		overflow-y: scroll;
+		overflow-y: auto;
 		top: 110%;
 		left: 0;
 		background: var(--boxes-color);
 		border-radius: 4px;
 		height: 0;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.option {
@@ -116,6 +122,7 @@
 		color: var(--faint-color);
 		border: none;
 		width: 100%;
+		height: 100%;
 		font-size: inherit;
 		text-align: left;
 	}

@@ -2,13 +2,9 @@
 	import NavItem from './NavItem.svelte';
 	import Select from '../components/Select.svelte';
 	import { DATABASES } from '../../stores/database';
+	import Divider from '../components/Divider.svelte';
 
-	// let options = $DATABASES;
-	const options = [];
-
-	for (let i = 0; i < 50; i++) {
-		options.push('Database ' + i);
-	}
+	let options = $DATABASES;
 </script>
 
 <div id="navigation" class="flex flex-column">
@@ -17,16 +13,24 @@
 			<Select {options} />
 		</div>
 	</div>
-	<div class="center h100 flex-column">
+	<div class="nav-item-container flex h100 flex-column">
 		<NavItem icon="home" text="Home" />
+		<Divider height="1.5rem" />
+		<NavItem icon="database" text="SQL query" />
 		<NavItem icon="grid_on" text="Tables" selected />
 	</div>
 </div>
 
 <style>
 	#database-select {
-		margin-top: 1em;
+		height: 5.5rem;
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid var(--lines);
+		margin-bottom: 0.75rem;
 	}
 
 	.select-wrapper {
@@ -35,7 +39,6 @@
 
 	#navigation {
 		display: flex;
-		justify-content: center;
 		height: 100%;
 		min-width: 240px;
 		width: 12.5vw;
@@ -43,5 +46,10 @@
 		border-width: 1px;
 		border-color: var(--lines);
 		border-right-style: solid;
+	}
+
+	.nav-item-container {
+		row-gap: 0.25em;
+		align-items: center;
 	}
 </style>
