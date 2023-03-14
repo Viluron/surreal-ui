@@ -2,15 +2,11 @@
 	import LoadingSpinner from './lib/components/LoadingSpinner.svelte';
 	import Layout from './lib/Layout.svelte';
 	import Login from './lib/Login.svelte';
+	import { LOADING } from './stores/app';
 	import { LOGGED_IN } from './stores/user';
 
-	let loading = false;
-
-	let loggedIn;
-	LOGGED_IN.subscribe(value => (loggedIn = value));
-
 	function login({ detail: success }) {
-		loading = false;
+		LOADING.set(false);
 
 		if (!success) return;
 
@@ -19,9 +15,9 @@
 </script>
 
 <main>
-	<LoadingSpinner visible={loading} />
-	{#if !loggedIn}
-		<Login on:submit={() => (loading = true)} on:login={login} />
+	<LoadingSpinner visible={$LOADING} />
+	{#if !$LOGGED_IN}
+		<Login on:submit={() => LOADING.set(true)} on:login={login} />
 	{:else}
 		<Layout />
 	{/if}

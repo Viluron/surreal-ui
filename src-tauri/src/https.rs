@@ -1,21 +1,18 @@
-use reqwest::blocking::{Client, Response};
+use reqwest::blocking::{Client, RequestBuilder};
 
-pub fn query(
-    url: &str,
-    username: &str,
-    password: Option<String>,
-    namespace: &str,
-    query: &str,
-) -> Response {
+pub fn get_request(method: &str, url: String) -> RequestBuilder {
     let client = Client::new();
-    let res = client
-        .post(url.to_owned() + "/sql")
-        .body(query.to_owned())
-        .basic_auth(username, password)
-        .header("Accept", "application/json")
-        .header("NS", namespace)
-        .send()
-        .unwrap();
 
-    res
+    let req;
+
+    match method {
+        "get" => req = client.get(url),
+        "post" => req = client.post(url),
+        "put" => req = client.put(url),
+        "delete" => req = client.delete(url),
+        "patch" => req = client.patch(url),
+        _ => req = client.get(url),
+    }
+
+    return req;
 }
