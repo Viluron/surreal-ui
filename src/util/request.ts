@@ -23,6 +23,8 @@ export async function query(query: string): Promise<any> {
 
 	let { data } = JSON.parse(response);
 
+	window.SurrealUi.log(`REQ: "${query}"`, { req: { url, username, password, namespace }, res: JSON.parse(response) });
+
 	return transformData(data);
 }
 
