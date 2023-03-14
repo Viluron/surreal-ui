@@ -12,6 +12,7 @@
 	let url: string = undefined;
 	let username: string = undefined;
 	let password: string = undefined;
+	let namespace: string = undefined;
 	let error = '';
 
 	async function login() {
@@ -25,29 +26,9 @@
 		USERNAME.set(username);
 		PASSWORD.set(password);
 		DATABASE_URL.set(url);
+		NAMESPACE.set(namespace);
 
-		let response = await query('INFO FOR KV;');
-
-		if (response.status) {
-			console.log(response);
-			dispatch('login', false);
-			error = 'Username or password not correct!';
-			return;
-		}
-
-		response = response as IInfoKV;
-		const namespaces = Object.keys(response.ns);
-		NAMESPACES.set(namespaces || []);
-
-		// No namespaces found
-		if (namespaces.length === 0) {
-			dispatch('login', true);
-			return;
-		}
-
-		NAMESPACE.set(namespaces[0]);
-
-		response = await query('USE NS ' + namespaces[0] + '; INFO FOR NS;');
+		const response = await query('USE NS ' + namespace + '; INFO FOR NS;');
 
 		if (response.status) {
 			console.log(response);
@@ -79,6 +60,7 @@
 				{/if}
 			</div>
 			<Input placeholder="Database URL" class="test" on:change={({ detail }) => (url = detail)} />
+			<Input placeholder="Namespace" class="test" on:change={({ detail }) => (namespace = detail)} />
 			<Input placeholder="Username" class="test" on:change={({ detail }) => (username = detail)} />
 			<Input placeholder="Password" type="password" on:change={({ detail }) => (password = detail)} />
 			<button type="submit" on:click={login}>
