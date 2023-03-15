@@ -108,7 +108,7 @@
 		height: 4rem;
 		font-weight: 500;
 		width: 12.5vw;
-		min-width: 240px;
+		min-width: 239px;
 		height: 100%;
 		align-items: center;
 		border-right: 1px solid var(--lines);
@@ -119,6 +119,6 @@
 	}
 
 	.table-data-container {
-		width: 75vw;
+		width: calc(75vw - 1px);
 	}
 </style>
