@@ -24,7 +24,6 @@
 
 <style>
 	#content {
-		height: 100%;
-		width: 100%;
+		width: 87.5%;
 	}
 </style>

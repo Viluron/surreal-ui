@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Icon from '../../../lib/components/Icon.svelte';
 	import { DATABASE, TABLE, TABLES } from '../../../stores/database';
 	import { httpRequest, query } from '../../../util/request';
@@ -66,8 +65,8 @@
 				{/each}
 			{/await}
 		</div>
-		<div class="flex-column w100">
-			<div class="table-data w100">
+		<div class="flex-column table-data-container">
+			<div class="table-data">
 				<Table data={content} />
 			</div>
 			<Footer />
@@ -109,7 +108,7 @@
 		height: 4rem;
 		font-weight: 500;
 		width: 12.5vw;
-		min-width: 239px;
+		min-width: 240px;
 		height: 100%;
 		align-items: center;
 		border-right: 1px solid var(--lines);
@@ -117,6 +116,9 @@
 
 	.table-data {
 		height: calc(100% - 8rem);
-		width: calc(100% - 25vw);
+	}
+
+	.table-data-container {
+		width: 75vw;
 	}
 </style>

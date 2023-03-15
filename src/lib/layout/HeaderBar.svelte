@@ -45,14 +45,13 @@
 	}
 
 	#headerbar > div:nth-child(1) {
-		width: 25vw;
+		width: 25%;
 		min-width: 480px;
 		height: 100%;
 		border-right: 1px solid var(--lines);
 	}
 
 	#headerbar > div:nth-child(2) {
-		width: 75vw;
 		height: 100%;
 	}
 

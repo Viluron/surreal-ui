@@ -32,7 +32,6 @@
 	}
 
 	.table-actions {
-		width: 100%;
 		align-items: center;
 		justify-content: flex-start;
 	}

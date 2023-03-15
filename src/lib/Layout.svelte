@@ -6,7 +6,7 @@
 
 <div id="layout">
 	<HeaderBar />
-	<div class="flex w100">
+	<div class="w100 flex">
 		<Navigation />
 		<Content />
 	</div>

@@ -7,19 +7,21 @@
 	let options = $DATABASES;
 </script>
 
-<div id="navigation" class="flex flex-column">
-	<div id="database-select" class="center">
-		<div class="select-wrapper">
-			<Select {options} />
+<div id="navigation">
+	<div class="flex flex-column">
+		<div id="database-select" class="center">
+			<div class="select-wrapper">
+				<Select {options} />
+			</div>
 		</div>
-	</div>
-	<div class="nav-item-container flex h100 flex-column">
-		<NavItem icon="home" text="Home" tab="home" />
-		<Divider height="1.5rem" />
-		<NavItem icon="database" text="SQL query" tab="query" />
-		<NavItem icon="grid_on" text="Tables" tab="tables" />
-		<Divider height="1.5rem" />
-		<NavItem icon="settings" text="Settings" tab="settings" />
+		<div class="nav-item-container flex h100 flex-column">
+			<NavItem icon="home" text="Home" tab="home" />
+			<Divider height="1.5rem" />
+			<NavItem icon="database" text="SQL query" tab="query" />
+			<NavItem icon="grid_on" text="Tables" tab="tables" />
+			<Divider height="1.5rem" />
+			<NavItem icon="settings" text="Settings" tab="settings" />
+		</div>
 	</div>
 </div>
 
@@ -39,10 +41,9 @@
 	}
 
 	#navigation {
-		display: flex;
 		height: 100%;
 		min-width: 240px;
-		width: 12.5vw;
+		width: 12.5%;
 		background-color: var(--back-color);
 		border-width: 1px;
 		border-color: var(--lines);
