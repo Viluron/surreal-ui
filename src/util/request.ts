@@ -32,7 +32,7 @@ export async function query(query: string): Promise<any> {
 
 type Method = 'get' | 'post' | 'put' | 'delete' | 'patch';
 export async function httpRequest(method: Method, table: string, data?: any): Promise<any> {
-	return JSON.parse(
+	const result = JSON.parse(
 		await invoke('http', {
 			url,
 			username,
@@ -44,6 +44,13 @@ export async function httpRequest(method: Method, table: string, data?: any): Pr
 			data: JSON.stringify(data) || ''
 		})
 	);
+
+	window.SurrealUi.log(`${method.toUpperCase()}: ${table}"`, {
+		req: { url, username, password, namespace },
+		res: result
+	});
+
+	return result;
 }
 
 function transformData(data: Array<IInfoDB | IInfoNS | IInfoKV | IQueryResponse> | IQueryError): Data {

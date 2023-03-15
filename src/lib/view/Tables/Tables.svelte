@@ -5,24 +5,17 @@
 	import { httpRequest, query } from '../../../util/request';
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
-
-	let tableData = {
-		columns: [],
-		data: []
-	};
+	import Table from '../../components/Table/Table.svelte';
 
 	let database = $DATABASE;
+	let columns = [];
+	let content = [];
 
 	$: $TABLE,
-		() => {
+		(() => {
+			window.SurrealUi.log('Table changed. Loading data...');
 			getTableData();
-		};
-
-	const onSelectTable = (tableName: string) => {
-		TABLE.set(tableName);
-
-		getTableData();
-	};
+		})();
 
 	const getTables = async () => {
 		let response = await query(`USE DB ${database}; INFO FOR DB;`);
@@ -42,8 +35,8 @@
 
 		if (response.length === 0 || response[0].status !== 'OK') {
 			// TODO Error handling
-			tableData.data = [];
-			tableData.columns = [];
+			content = [];
+			columns = [];
 			return;
 		}
 
@@ -51,7 +44,8 @@
 
 		if (!data) return;
 
-		tableData.data = data;
+		columns = Object.keys(data[0]);
+		content = data;
 	};
 </script>
 
@@ -64,7 +58,7 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class={`table-entry flex ${tableName === $TABLE ? 'selected' : ''}`}
-						on:click={() => onSelectTable(tableName)}
+						on:click={() => TABLE.set(tableName)}
 					>
 						<Icon icon="grid_on" size="32px" />
 						<span class="name">{tableName}</span>
@@ -73,25 +67,8 @@
 			{/await}
 		</div>
 		<div class="flex-column w100">
-			<div class="table-data ">
-				<table>
-					<thead>
-						<tr>
-							{#each tableData.columns as column}
-								<th>{column}</th>
-							{/each}
-						</tr>
-					</thead>
-					<tbody>
-						{#each tableData.data as row}
-							<tr>
-								{#each tableData.columns as column}
-									<td>{row[column]}</td>
-								{/each}
-							</tr>
-						{/each}
-					</tbody>
-				</table>
+			<div class="table-data w100">
+				<Table data={content} />
 			</div>
 			<Footer />
 		</div>
@@ -140,6 +117,6 @@
 
 	.table-data {
 		height: calc(100% - 8rem);
-		width: 100%;
+		width: calc(100% - 25vw);
 	}
 </style>
